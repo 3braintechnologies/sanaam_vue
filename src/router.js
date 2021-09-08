@@ -10,10 +10,11 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: "/", redirect: "/login" },
-    { path: "/login", component: Login },
+    { path: "/login", component: Login, meta: { requiresUnauth: true } },
     {
       path: "/backoffice",
       component: TheMainLayout,
+      meta: { requiresAuth: true, isSuper: true },
       children: [
         {
           path: "dashboard/:activeTab",
@@ -25,6 +26,7 @@ const router = createRouter({
     {
       path: "/company",
       component: TheMainLayout,
+      meta: { requiresAuth: true, isAdmin: true },
       children: [
         {
           path: "dashboard/:activeTab",
@@ -35,6 +37,28 @@ const router = createRouter({
     },
     { path: "/:notFound(.*)", component: NotFound },
   ],
+});
+
+router.beforeEach(function(to, _, next) {
+  if (
+    to.meta.requiresAuth &&
+    ((to.meta.isSuper && !JSON.parse(localStorage.getItem("user"))?.is_super) ||
+      (to.meta.isAdmin && !JSON.parse(localStorage.getItem("user"))?.is_admin))
+  ) {
+    localStorage.clear();
+    next("/login");
+  } else if (
+    to.meta.requiresUnauth &&
+    (JSON.parse(localStorage.getItem("user"))?.is_super ||
+      JSON.parse(localStorage.getItem("user"))?.is_admin)
+  ) {
+    if (JSON.parse(localStorage.getItem("user"))?.is_super)
+      next("/backoffice/dashboard/Overview");
+    if (JSON.parse(localStorage.getItem("user"))?.is_admin)
+      next("/company/dashboard/Employees");
+  } else {
+    next();
+  }
 });
 
 export default router;

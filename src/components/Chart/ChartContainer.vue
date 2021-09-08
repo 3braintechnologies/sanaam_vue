@@ -3,7 +3,7 @@
 </template>
 
 <script>
-var CanvasJS = require("../../lib/canvasjs.min");
+let CanvasJS = require("../../lib/canvasjs.min");
 CanvasJS = CanvasJS.Chart ? CanvasJS : window.CanvasJS;
 
 export default {

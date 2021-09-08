@@ -1,7 +1,7 @@
 <template>
   <div id="the-header-container">
     <div class="left-container">
-      <div class="logo-container" />
+      <div class="logo-container" @click="loadPage" />
     </div>
     <div class="user-info-container">
       <div style="marginRight:20px;">
@@ -37,6 +37,9 @@ export default {
   methods: {
     toggleMenu() {
       this.menuOpen = !this.menuOpen;
+    },
+    loadPage() {
+      this.$router.push("/");
     }
   },
   computed: {
