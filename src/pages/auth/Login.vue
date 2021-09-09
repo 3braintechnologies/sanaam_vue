@@ -1,16 +1,16 @@
 <template>
   <div id="login-container">
     <base-spinner v-if="loading"></base-spinner>
-    <div class="flexContainer">
+    <div class="flex-container">
       <img class="logo" src="/images/logo.svg" alt="logo" />
     </div>
-    <div class="welcomeText">
+    <div class="welcome-text">
       Welcome to Sanaam!
     </div>
-    <div class="flexContainer">
-      <div class="formContainer">
+    <div class="flex-container">
+      <div class="form-container">
         <div class="error-container" v-if="error">{{ error }}</div>
-        <div class="formTitle">Login</div>
+        <div class="form-title">Login</div>
         <form @submit.prevent="submitForm">
           <base-input
             label="Email"
@@ -46,9 +46,9 @@
         </form>
       </div>
     </div>
-    <div class="flexContainer">
+    <div class="flex-container">
       <div class="bottomContainer">
-        <div class="flexContainer">
+        <div class="flex-container">
           <a class="link" href="http://localhost:3000">
             About
           </a>
@@ -121,7 +121,7 @@ export default {
   top: 50%;
   transform: translate(-50%, -50%);
 }
-#login-container .flexContainer {
+#login-container .flex-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -130,20 +130,20 @@ export default {
   width: 100px;
   height: 76px;
 }
-#login-container .welcomeText {
+#login-container .welcome-text {
   margin-top: 10px;
   text-align: center;
   font-size: 28px;
   font-family: MARKPROLIGHT;
 }
-#login-container .formContainer {
+#login-container .form-container {
   box-shadow: 0px 0px 10px #cfd9ea80;
   padding: 20px 30px;
   border-radius: 10px;
   margin: 20px 0px;
   width: 370px;
 }
-#login-container .formTitle {
+#login-container .form-title {
   margin-bottom: 20px;
   color: #3e83fb;
   font-size: 24px;

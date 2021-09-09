@@ -48,7 +48,7 @@ export default {
 #main-sidebar {
   width: 230px;
   background-color: #ecf3ff;
-  height: calc(100vh - 145px);
+  height: calc(100vh - 85px);
   padding: 30px 0px;
   position: fixed;
 }

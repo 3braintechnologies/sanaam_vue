@@ -1,17 +1,20 @@
 <template>
-  <div class="input-root" :style="getRootStyle">
+  <div class="select-root">
     <div class="form-label labelText" v-if="label">
       {{ label }}
     </div>
-    <input
-      class="form-control"
+    <select
+      class="form-select"
       :class="{ invalidInput: isValid ? true : false }"
-      :type="type"
-      :label="label"
-      :placeholder="placeholder"
-      v-model.trim="inputfield"
       :style="style"
-    />
+      :placeholder="placeholder"
+      v-model="selectfield"
+    >
+      <option value="default">{{ placeholder }}</option>
+      <option v-for="option in options" :key="option.id" :value="option.id">{{
+        option.name
+      }}</option>
+    </select>
     <div class="helperText" v-if="helperText">
       {{ helperText }}
     </div>
@@ -22,27 +25,21 @@
 export default {
   emits: ["change-value"],
   props: [
-    "type",
+    "options",
     "label",
     "placeholder",
     "isValid",
     "helperText",
     "field",
     "value",
-    "style",
-    "removeDefaultMargin"
+    "style"
   ],
   data() {
-    return { inputfield: this.value };
+    return { selectfield: this.value };
   },
   watch: {
-    inputfield() {
-      this.$emit("change-value", this.inputfield, this.field);
-    }
-  },
-  computed: {
-    getRootStyle() {
-      return `margin-bottom: ${this.removeDefaultMargin ? "0px" : "20px"};`;
+    selectfield() {
+      this.$emit("change-value", this.selectfield, this.field);
     }
   }
 };
@@ -70,20 +67,21 @@ export default {
   border-color: red !important;
   background-color: white !important;
 }
-input {
+select {
   padding: 10px;
-  font-size: 14px;
-  font-family: MARKPRO;
+  color: #150e4a;
+  font-size: 16px;
+  font-family: MARKPROMEDIUM;
   width: -webkit-fill-available;
   background-color: #ecf3ff;
   border-radius: 4px;
   border: 1px solid #ecf3ff;
 }
-input:focus-visible {
+select:focus-visible {
   border: 1px solid #3e83fa;
   outline: none;
 }
-input:hover {
+select:hover {
   border: 1px solid #3e83fa;
   outline: none;
 }

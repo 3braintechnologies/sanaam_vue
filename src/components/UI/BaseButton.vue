@@ -1,5 +1,7 @@
 <template>
-  <button :type="type" @click="onClick" :style="style"><slot></slot></button>
+  <button class="btn" :type="type" @click="onClick" :style="style">
+    <slot></slot>
+  </button>
 </template>
 
 <script>
@@ -54,8 +56,8 @@ export default {
           : "auto"
       };
       border-radius:21px;
-      text-transform: capitalize;line-height: 1.75;
-      padding: 6px 16px; font-size: 0.875rem; min-width: 64px;
+      text-transform: capitalize;
+      padding: 6px 16px; 
       width:-webkit-fill-available;cursor:pointer;`;
     }
   }

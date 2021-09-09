@@ -12,12 +12,11 @@
   bottom: 0;
   background-color: rgba(255, 255, 255, 0.7);
   z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .loader {
-  position: absolute;
-  left: 35%;
-  top: 40%;
-  transform: translate(-35%, -40%);
   border: 8px solid #f3f3f3;
   border-top: 8px solid #3e83fb;
   border-radius: 50%;
