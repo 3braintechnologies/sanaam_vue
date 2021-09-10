@@ -131,9 +131,7 @@
                     <div class="point" style="background-color: #3E83FB;"></div>
                     <div style="margin-left: 20px;">
                       <div class="label">
-                        Remaining Available
-                        <br />
-                        Amounts
+                        Remaining Available Amounts
                       </div>
                       <div class="value">
                         <span class="currency">
@@ -235,7 +233,7 @@ export default {
   data() {
     return {
       selectedCompany: "default",
-      selectedCurrency: "default",
+      selectedCurrency: "USD",
       selectedDate: moment().format("YYYY-MM-DD"),
       salaryChart: null,
       salaryChartOptions: {
@@ -326,6 +324,11 @@ export default {
         );
         this.withdrawalChart.render();
       }
+    },
+    getCompanyOptions: function(data) {
+      if (data && data.length && data[0].id) {
+        this.selectedCompany = data[data.length - 1].id;
+      }
     }
   },
   methods: {
@@ -349,17 +352,17 @@ export default {
   },
   computed: {
     getCompanySelectStyle() {
-      return `border-radius:20px;border:1px solid ${
+      return `border-radius:22px;border:1px solid ${
         this.selectedCompany !== "default" ? "#3E83FB" : "#ECF3FF"
       };`;
     },
     getCurrencySelectStyle() {
-      return `border-radius:20px;border:1px solid ${
+      return `border-radius:22px;border:1px solid ${
         this.selectedCurrency !== "default" ? "#3E83FB" : "#ECF3FF"
       };`;
     },
     getDatePickerSelectStyle() {
-      return `font-size: 16px; font-family: MARKPROMEDIUM;border-radius:20px;border:1px solid ${
+      return `font-size: 16px; font-family: MARKPROMEDIUM;border-radius:22px;border:1px solid ${
         this.selectedDate !== "default" ? "#3E83FB" : "#ECF3FF"
       };`;
     },

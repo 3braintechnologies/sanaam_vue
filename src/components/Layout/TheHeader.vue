@@ -16,12 +16,50 @@
           <img src="/images/default_user.svg" alt="default_user" />
         </div>
         <div>
-          <img
-            src="/images/chevron_dropdown_date.png"
-            alt="bell"
-            :style="getAnchorStyle"
-            @click="toggleMenu"
-          />
+          <div class="dropdown">
+            <img
+              class="dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              src="/images/chevron_dropdown_date.png"
+              alt="bell"
+              :style="getAnchorStyle"
+              @click="toggleMenu"
+            />
+            <ul class="dropdown-menu profile-menu">
+              <div
+                style="borderBottom: 1px solid #EBF2FE;padding: 0px 5px;paddingBottom: 10px;"
+              >
+                <div class="label" style="color: #150e4a;">
+                  {{ user?.first_name }}
+                  {{ user?.last_name }}
+                </div>
+                <div class="value" style="color: #150e4a;">
+                  {{ user?.email }}
+                </div>
+              </div>
+              <li>
+                <div class="dropdown-item">
+                  <img
+                    src="/images/setting_dark.png"
+                    alt="setting"
+                    style="margin-right:5px;"
+                  />
+                  <div class="menu-text">Settings</div>
+                </div>
+              </li>
+              <li>
+                <div class="dropdown-item" @click="logout">
+                  <img
+                    src="/images/logout.png"
+                    alt="setting"
+                    style="margin-right:5px;"
+                  />
+                  <div class="menu-text">Log out</div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -32,13 +70,21 @@
 import moment from "moment";
 export default {
   data() {
-    return { today: moment().format("DD/MM/YYYY"), menuOpen: false };
+    return {
+      today: moment().format("DD/MM/YYYY"),
+      menuOpen: false,
+      user: JSON.parse(localStorage.getItem("user"))
+    };
   },
   methods: {
     toggleMenu() {
-      this.menuOpen = !this.menuOpen;
+      // this.menuOpen = !this.menuOpen;
     },
     loadPage() {
+      this.$router.push("/");
+    },
+    logout() {
+      localStorage.clear();
       this.$router.push("/");
     }
   },
@@ -97,5 +143,21 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+#the-header-container .profile-menu {
+  border: 1px solid #d3d4d5;
+  padding: 10px;
+  border-radius: 15px;
+}
+#the-header-container .profile-menu .dropdown-item {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+#the-header-container .profile-menu .menu-text {
+  font-size: "16px";
+  font-family: MARKPROMEDIUM;
+  color: #150e4a;
 }
 </style>

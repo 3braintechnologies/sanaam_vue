@@ -38,6 +38,9 @@ export default {
     return { selectfield: this.value };
   },
   watch: {
+    value: function(val) {
+      this.selectfield = val;
+    },
     selectfield() {
       this.$emit("change-value", this.selectfield, this.field);
     }
