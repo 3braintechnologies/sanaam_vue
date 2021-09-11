@@ -1,7 +1,7 @@
 <template>
-  <div id="overview-container">
-    <base-spinner v-if="loading"></base-spinner>
-    <div class="container">
+  <div class="container">
+    <div id="overview-container">
+      <base-spinner v-if="loading"></base-spinner>
       <div class="row">
         <div class="col">
           <div class="header-container">
@@ -46,50 +46,48 @@
       </div>
     </div>
     <div class="tab-container">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <div class="tab">
-              <div>
-                <img src="/images/Salary Icon.svg" alt="Salary Icon" />
-              </div>
-              <div>
-                <div class="title">Total Monthly Net Salaries</div>
-                <div class="value">
-                  <span class="currency">
-                    {{ overviewData?.currency }}
-                  </span>
-                  {{ overviewData?.salaries }}
-                </div>
+      <div class="row">
+        <div class="col">
+          <div class="tab">
+            <div>
+              <img src="/images/Salary Icon.svg" alt="Salary Icon" />
+            </div>
+            <div>
+              <div class="title">Total Monthly Net Salaries</div>
+              <div class="value">
+                <span class="currency">
+                  {{ overviewData?.currency }}
+                </span>
+                {{ overviewData?.salaries }}
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="tab">
-              <div>
-                <img src="/images/Employees Icon.svg" alt="Employees Icon" />
-              </div>
-              <div>
-                <div class="title">Number of Employees</div>
-                <div class="value">
-                  {{ overviewData?.employees }}
-                </div>
+        </div>
+        <div class="col">
+          <div class="tab">
+            <div>
+              <img src="/images/Employees Icon.svg" alt="Employees Icon" />
+            </div>
+            <div>
+              <div class="title">Number of Employees</div>
+              <div class="value">
+                {{ overviewData?.employees }}
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="tab">
-              <div>
-                <img src="/images/Fees Icon.svg" alt="Fees Icon" />
-              </div>
-              <div>
-                <div class="title">Total Withdrawal fees</div>
-                <div class="value">
-                  <span class="currency">
-                    {{ overviewData?.currency }}
-                  </span>
-                  {{ overviewData?.fees }}
-                </div>
+        </div>
+        <div class="col">
+          <div class="tab">
+            <div>
+              <img src="/images/Fees Icon.svg" alt="Fees Icon" />
+            </div>
+            <div>
+              <div class="title">Total Withdrawal fees</div>
+              <div class="value">
+                <span class="currency">
+                  {{ overviewData?.currency }}
+                </span>
+                {{ overviewData?.fees }}
               </div>
             </div>
           </div>
@@ -97,121 +95,113 @@
       </div>
     </div>
     <div class="chart-main-container">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <div class="inner-container">
-              <div class="title">
-                Total Net Salaries Vs.
-                <br />
-                Remaining Available Amounts
+      <div class="row">
+        <div class="col">
+          <div class="inner-container">
+            <div class="title">
+              Total Net Salaries Vs.
+              <br />
+              Remaining Available Amounts
+            </div>
+            <div class="chart-container">
+              <div class="chart" style="position:relative;">
+                <div
+                  id="salaries-chart"
+                  style="height: 250px; width: 250px;"
+                ></div>
+                <div class="middle-text-container">
+                  <div class="label">Total</div>
+                  <div class="value">
+                    <span class="currency">
+                      {{ overviewData?.currency }}
+                    </span>
+
+                    {{ overviewData?.balances }}
+                  </div>
+                </div>
               </div>
-              <div class="chart-container">
-                <div class="chart" style="position:relative;">
-                  <div
-                    id="salaries-chart"
-                    style="height: 250px; width: 250px;"
-                  ></div>
-                  <div class="middle-text-container">
-                    <div class="label">Total</div>
+              <div class="information" style="margin-top:100px;">
+                <div class="chart-label-container" style="margin-bottom: 15px;">
+                  <div class="point" style="background-color: #3E83FB;"></div>
+                  <div style="margin-left: 20px;">
+                    <div class="label">
+                      Remaining Available Amounts
+                    </div>
                     <div class="value">
                       <span class="currency">
                         {{ overviewData?.currency }}
                       </span>
-
                       {{ overviewData?.balances }}
                     </div>
                   </div>
                 </div>
-                <div class="information" style="margin-top:100px;">
-                  <div
-                    class="chart-label-container"
-                    style="margin-bottom: 15px;"
-                  >
-                    <div class="point" style="background-color: #3E83FB;"></div>
-                    <div style="margin-left: 20px;">
-                      <div class="label">
-                        Remaining Available Amounts
-                      </div>
-                      <div class="value">
-                        <span class="currency">
-                          {{ overviewData?.currency }}
-                        </span>
-                        {{ overviewData?.balances }}
-                      </div>
+                <div class="chart-label-container">
+                  <div class="point" style="background-color: #150E4A;"></div>
+                  <div style="margin-left: 20px;">
+                    <div class="label">
+                      Total Net Salaries
                     </div>
-                  </div>
-                  <div class="chart-label-container">
-                    <div class="point" style="background-color: #150E4A;"></div>
-                    <div style="margin-left: 20px;">
-                      <div class="label">
-                        Total Net Salaries
-                      </div>
-                      <div class="value">
-                        <span class="currency">
-                          {{ overviewData?.currency }}
-                        </span>
-                        {{ overviewData?.salaries }}
-                      </div>
+                    <div class="value">
+                      <span class="currency">
+                        {{ overviewData?.currency }}
+                      </span>
+                      {{ overviewData?.salaries }}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="inner-container">
-              <div class="title">
-                Withdrawal Requests Vs.
-                <br />
-                Confirmed Transfers Amounts
+        </div>
+        <div class="col">
+          <div class="inner-container">
+            <div class="title">
+              Withdrawal Requests Vs.
+              <br />
+              Confirmed Transfers Amounts
+            </div>
+            <div class="chart-container">
+              <div class="chart" style="position:relative;">
+                <div
+                  id="requests-chart"
+                  style="height: 250px; width: 250px;"
+                ></div>
+                <div class="middle-text-container">
+                  <div class="label">Total</div>
+                  <div class="value">
+                    <span class="currency">
+                      {{ overviewData?.currency }}
+                    </span>
+                    {{ overviewData?.withdrawals }}
+                  </div>
+                </div>
               </div>
-              <div class="chart-container">
-                <div class="chart" style="position:relative;">
-                  <div
-                    id="requests-chart"
-                    style="height: 250px; width: 250px;"
-                  ></div>
-                  <div class="middle-text-container">
-                    <div class="label">Total</div>
+              <div class="information" style="margin-top:100px;">
+                <div class="chart-label-container" style="margin-bottom: 15px;">
+                  <div class="point" style="background-color: #3E83FB;"></div>
+                  <div style="margin-left: 20px;">
+                    <div class="label">
+                      Withdrawal Requests
+                    </div>
+                    <div class="value">
+                      <span class="currency">
+                        {{ overviewData?.currency }}
+                      </span>
+                      {{ overviewData?.pending }}
+                    </div>
+                  </div>
+                </div>
+                <div class="chart-label-container">
+                  <div class="point" style="background-color: #150E4A;"></div>
+                  <div style="margin-left: 20px;">
+                    <div class="label">
+                      Confirmed Transfers
+                    </div>
                     <div class="value">
                       <span class="currency">
                         {{ overviewData?.currency }}
                       </span>
                       {{ overviewData?.withdrawals }}
-                    </div>
-                  </div>
-                </div>
-                <div class="information" style="margin-top:100px;">
-                  <div
-                    class="chart-label-container"
-                    style="margin-bottom: 15px;"
-                  >
-                    <div class="point" style="background-color: #3E83FB;"></div>
-                    <div style="margin-left: 20px;">
-                      <div class="label">
-                        Withdrawal Requests
-                      </div>
-                      <div class="value">
-                        <span class="currency">
-                          {{ overviewData?.currency }}
-                        </span>
-                        {{ overviewData?.pending }}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="chart-label-container">
-                    <div class="point" style="background-color: #150E4A;"></div>
-                    <div style="margin-left: 20px;">
-                      <div class="label">
-                        Confirmed Transfers
-                      </div>
-                      <div class="value">
-                        <span class="currency">
-                          {{ overviewData?.currency }}
-                        </span>
-                        {{ overviewData?.withdrawals }}
-                      </div>
                     </div>
                   </div>
                 </div>

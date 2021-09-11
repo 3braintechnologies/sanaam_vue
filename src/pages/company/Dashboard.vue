@@ -44,6 +44,6 @@ export default {
   background-color: #ffffff;
   width: calc(100% - 85px);
   min-height: calc(100vh - 85px);
-  padding: 45px 90px;
+  padding: 45px 60px;
 }
 </style>
