@@ -3,22 +3,22 @@ import TYPES from "./types";
 import { Constants } from "../../../lib/constant";
 
 export default {
-  async getCompanyList(context, payload) {
-    context.commit(TYPES.COMPANY_LIST_LOADING);
+  async getOvertimeList(context, payload) {
+    context.commit(TYPES.OVERTIME_LIST_LOADING);
     try {
-      let res = await API.companyList(payload);
+      let res = await API.overtimeList(payload);
       if (res && res.data) {
-        context.commit(TYPES.COMPANY_LIST_SUCCESS, res);
+        context.commit(TYPES.OVERTIME_LIST_SUCCESS, res);
       } else if (res && res.message) {
-        context.commit(TYPES.COMPANY_LIST_ERROR, res.message);
+        context.commit(TYPES.OVERTIME_LIST_ERROR, res.message);
       } else {
         context.commit(
-          TYPES.COMPANY_LIST_ERROR,
+          TYPES.OVERTIME_LIST_ERROR,
           Constants.ERROR.INTERNAL_SERVER
         );
       }
     } catch (error) {
-      context.commit(TYPES.COMPANY_LIST_ERROR, {
+      context.commit(TYPES.OVERTIME_LIST_ERROR, {
         payload: error.message,
       });
     }

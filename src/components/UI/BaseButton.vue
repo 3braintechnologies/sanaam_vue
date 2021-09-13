@@ -18,19 +18,18 @@
 
 <script>
 export default {
-  props: ["type", "onClick", "stylevariant"],
-  computed: {
-    style() {
-      return `border-radius:21px;
-      text-transform: capitalize;
-      padding: 6px 16px; 
-      width:-webkit-fill-available;cursor:pointer;`;
-    }
-  }
+  props: ["type", "onClick", "stylevariant", "style"]
 };
 </script>
 
 <style scoped>
+.btn {
+  border-radius: 22px;
+  text-transform: capitalize;
+  padding: 6px 16px;
+  width: -webkit-fill-available;
+  cursor: pointer;
+}
 .primaryBtn {
   background-color: #3e83fb;
   color: #ffffff;

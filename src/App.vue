@@ -131,4 +131,37 @@ body {
   font-family: MARKPROBOOK;
   font-size: 13px;
 }
+#table-container .header-cell {
+  color: #3e83fb;
+  font-size: 13px;
+  font-family: MARKPROBOLD;
+  border-bottom: 1px solid #f6faff;
+  padding: 16px;
+}
+#table-container .column-cell {
+  color: #150e4a;
+  font-size: 14px;
+  font-family: MARKPROBOOK;
+  border-bottom: 1px solid #f6faff;
+  padding: 16px;
+}
+#table-container .table-row:hover {
+  background-color: #ecf3ff;
+}
+#table-container .no-data-container {
+  height: 200px;
+  position: relative;
+}
+#table-container .no-data-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #150e4a;
+  font-size: 20px;
+  font-family: MARKPROBOOK;
+}
+.page-item {
+  cursor: pointer;
+}
 </style>

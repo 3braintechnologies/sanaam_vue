@@ -37,10 +37,12 @@
             Forgot password?
           </div>
           <div style="margin-top:10px;">
-            <base-button type="submit" stylevariant="secondary1">
-              <span style="font-size: 16px; font-family: MARKPROMEDIUM;">
-                submit
-              </span>
+            <base-button
+              type="submit"
+              stylevariant="secondary1"
+              style="font-size: 16px; font-family: MARKPROMEDIUM;"
+            >
+              submit
             </base-button>
           </div>
         </form>
@@ -68,8 +70,8 @@
 export default {
   data() {
     return {
-      email: "",
-      password: "",
+      email: "saurabh.skyward@gmail.com",
+      password: "Password1",
       isValidated: false
     };
   },

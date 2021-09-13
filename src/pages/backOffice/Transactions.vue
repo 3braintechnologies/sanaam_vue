@@ -6,11 +6,14 @@
         <div class="col">
           <div class="header-container">
             <div class="title">Transactions</div>
-            <div class="filter-container">
+            <div
+              class="filter-container"
+              v-if="table !== 'SalariesTransfersTable'"
+            >
               <div class="title">Filter by</div>
               <div style="width:180px;">
                 <base-select
-                  placeholder="Select Company"
+                  placeholder="All"
                   :options="getCompanyOptions"
                   field="selectedCompany"
                   :value="selectedCompany"
@@ -38,7 +41,7 @@
             />
             <div class="block" @click="setTable('WithdrawalRequestsTable')">
               <div class="label">Withdrawal Requests</div>
-              <div class="count">10</div>
+              <div class="count">{{ getWithdrawalRequestsCount() }}</div>
             </div>
           </div>
           <div class="CenterTab" @click="setTable('OvertimeRequestsTable')">
@@ -53,7 +56,7 @@
             />
             <div class="block" @click="setTable('OvertimeRequestsTable')">
               <div class="label">Overtime Requests</div>
-              <div class="count">10</div>
+              <div class="count">{{ getOvertimeRequestCount() }}</div>
             </div>
           </div>
           <div class="RightTab" @click="setTable('SalariesTransfersTable')">
@@ -68,7 +71,7 @@
             />
             <div class="block" @click="setTable('SalariesTransfersTable')">
               <div class="label">Salaries Transfers</div>
-              <div class="count">10</div>
+              <div class="count">{{ getSalariesTransfersCount() }}</div>
             </div>
           </div>
         </div>
@@ -76,7 +79,14 @@
       <div class="row" style="margin-top:105px;">
         <div class="col">
           <!-- table -->
-          <component :is="table"></component>
+          <component
+            :is="table"
+            :selectedCompany="selectedCompany"
+            :page_size="page_size"
+            :getPaymentListMethod="getPaymentListMethod"
+            :getCompanyListMethod="getCompanyListMethod"
+            :getOvertimeListMethod="getOvertimeListMethod"
+          ></component>
         </div>
       </div>
     </div>
@@ -96,9 +106,9 @@ export default {
   },
   data() {
     return {
-      loading: false,
       selectedCompany: "default",
-      table: "WithdrawalRequestsTable"
+      table: "WithdrawalRequestsTable",
+      page_size: 10
     };
   },
   methods: {
@@ -107,13 +117,39 @@ export default {
     },
     setTable(table) {
       this.table = table;
-    }
-  },
-  watc: {
-    getCompanyOptions: function(data) {
-      if (data && data.length && data[0].id) {
-        this.selectedCompany = data[data.length - 1].id;
+      if (table !== "SalariesTransfersTable") {
+        this.getCompanyListMethod();
       }
+    },
+    getWithdrawalRequestsCount() {
+      return this.$store.getters["payments/paymentList"]?.count;
+    },
+    getOvertimeRequestCount() {
+      return this.$store.getters["overtimes/overtimeList"]?.count;
+    },
+    getSalariesTransfersCount() {
+      return this.$store.getters["company/companyList"]?.count;
+    },
+    getPaymentListMethod(page) {
+      let filters = { state: "PENDING", page, page_size: this.page_size };
+      if (this.selectedCompany !== "default") {
+        filters["company_id"] = this.selectedCompany;
+      }
+      this.$store.dispatch("payments/getPaymentList", filters);
+    },
+    getCompanyListMethod(page) {
+      let filters = {};
+      if (this.table === "SalariesTransfersTable") {
+        filters = { page, page_size: this.page_size };
+      }
+      this.$store.dispatch("company/getCompanyList", filters);
+    },
+    getOvertimeListMethod(page) {
+      let filters = { state: "APPROVED", page, page_size: this.page_size };
+      if (this.selectedCompany !== "default") {
+        filters["company_id"] = this.selectedCompany;
+      }
+      this.$store.dispatch("overtimes/getOvertimeList", filters);
     }
   },
   computed: {
@@ -123,11 +159,27 @@ export default {
       };`;
     },
     getCompanyOptions() {
-      return this.$store.getters["company/companyList"];
+      return this.$store.getters["company/companyList"]?.data;
+    },
+    loading() {
+      return (
+        this.$store.getters["company/loading"] ||
+        this.$store.getters["payments/loading"] ||
+        this.$store.getters["overtimes/loading"]
+      );
     },
     error() {
-      return this.$store.getters["company/error"];
+      return (
+        this.$store.getters["company/error"] ||
+        this.$store.getters["payments/error"] ||
+        this.$store.getters["overtimes/error"]
+      );
     }
+  },
+  beforeMount() {
+    this.getPaymentListMethod(1);
+    this.getCompanyListMethod(1);
+    this.getOvertimeListMethod(1);
   }
 };
 </script>
