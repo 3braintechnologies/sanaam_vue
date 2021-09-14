@@ -165,14 +165,16 @@ export default {
       return (
         this.$store.getters["company/loading"] ||
         this.$store.getters["payments/loading"] ||
-        this.$store.getters["overtimes/loading"]
+        this.$store.getters["overtimes/loading"] ||
+        this.$store.getters["employees/loading"]
       );
     },
     error() {
       return (
         this.$store.getters["company/error"] ||
         this.$store.getters["payments/error"] ||
-        this.$store.getters["overtimes/error"]
+        this.$store.getters["overtimes/error"] ||
+        this.$store.getters["employees/error"]
       );
     }
   },

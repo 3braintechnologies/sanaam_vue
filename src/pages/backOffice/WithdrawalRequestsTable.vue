@@ -61,15 +61,16 @@
               <div class="withdraw-action">
                 <div
                   class="salary"
-                  style="fontFamily:MARKPROHEAVY;marginRight:10px;"
+                  style="fontFamily:MARKPROHEAVY;marginRight:10px;flex:0.5;"
                 >
                   <span class="currency">{{ row?.company?.currency }}</span>
                   {{ row?.total }}
                 </div>
                 <base-button
+                  v-if="row?.total"
                   type="button"
                   stylevariant="secondary3"
-                  style="height:28px;font-size:10px;font-family:MARKPROBOLD;"
+                  style="height:28px;font-size:10px;font-family:MARKPROBOLD;flex:0.5;"
                 >
                   Transfer
                 </base-button>
@@ -207,5 +208,6 @@ export default {
 .withdraw-action {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 </style>

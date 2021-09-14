@@ -6,6 +6,7 @@ import companyModule from "./modules/company/index";
 import overviewModule from "./modules/overview/index";
 import paymentsModule from "./modules/payments/index";
 import overtimesModule from "./modules/overtimes/index";
+import employeesModule from "./modules/employees/index";
 
 const store = createStore({
   modules: {
@@ -15,6 +16,7 @@ const store = createStore({
     overview: overviewModule,
     payments: paymentsModule,
     overtimes: overtimesModule,
+    employees: employeesModule,
   },
 });
 
