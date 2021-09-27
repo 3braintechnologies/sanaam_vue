@@ -164,4 +164,16 @@ body {
 .page-item {
   cursor: pointer;
 }
+.breadcrumb .breadcrumb-item {
+  color: #9fc1fd;
+  cursor: pointer;
+}
+.breadcrumb-item + .breadcrumb-item::before {
+  color: #9fc1fd;
+  content: var(--bs-breadcrumb-divider, ">");
+}
+.breadcrumb .breadcrumb-item.active {
+  color: #3e83fb;
+  cursor: auto;
+}
 </style>

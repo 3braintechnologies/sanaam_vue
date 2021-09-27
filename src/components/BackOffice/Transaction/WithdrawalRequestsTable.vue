@@ -71,6 +71,9 @@
                   type="button"
                   stylevariant="secondary3"
                   style="height:28px;font-size:10px;font-family:MARKPROBOLD;flex:0.5;"
+                  data-bs-toggle="modal"
+                  data-bs-target="#withdrawalRequestsModal"
+                  @click="getWithdrawalInfo(row?.id)"
                 >
                   Transfer
                 </base-button>
@@ -122,14 +125,19 @@
         </li>
       </ul>
     </nav>
+    <withdrawal-requests-modal
+      :getPaymentListMethod="getPaymentListMethod"
+    ></withdrawal-requests-modal>
   </div>
 </template>
 
 <script>
 import moment from "moment";
+import WithdrawalRequestsModal from "./WithdrawalRequestsModal.vue";
 
 export default {
   props: ["selectedCompany", "page_size", "getPaymentListMethod"],
+  components: { WithdrawalRequestsModal },
   data() {
     return {
       data: null,
@@ -153,6 +161,9 @@ export default {
       if (this.activePage < this.totalPage) {
         this.activePage = this.activePage + 1;
       }
+    },
+    getWithdrawalInfo(id) {
+      this.$store.dispatch("payments/getPaymentInfo", id);
     }
   },
   watch: {
@@ -169,6 +180,9 @@ export default {
     }
   },
   computed: {
+    settleSuccess() {
+      return this.$store.getters["payments/settleSuccess"];
+    },
     paymentList() {
       return this.$store.getters["payments/paymentList"];
     },

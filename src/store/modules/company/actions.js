@@ -23,4 +23,24 @@ export default {
       });
     }
   },
+  async getCompanyInfo(context, payload) {
+    context.commit(TYPES.COMPANY_INFO_LOADING);
+    try {
+      let res = await API.getCompanyInfo(payload);
+      if (res && res.data) {
+        context.commit(TYPES.COMPANY_INFO_SUCCESS, res.data);
+      } else if (res && res.message) {
+        context.commit(TYPES.COMPANY_INFO_ERROR, res.message);
+      } else {
+        context.commit(
+          TYPES.COMPANY_INFO_ERROR,
+          Constants.ERROR.INTERNAL_SERVER
+        );
+      }
+    } catch (error) {
+      context.commit(TYPES.COMPANY_INFO_ERROR, {
+        payload: error.message,
+      });
+    }
+  },
 };

@@ -9,6 +9,7 @@ export default {
       loading: false,
       error: null,
       companyList: null,
+      companyInfo: null,
     };
   },
   mutations,

@@ -94,9 +94,9 @@
 </template>
 
 <script>
-import WithdrawalRequestsTable from "./WithdrawalRequestsTable.vue";
-import OvertimeRequestsTable from "./OvertimeRequestsTable.vue";
-import SalariesTransfersTable from "./SalariesTransfersTable.vue";
+import WithdrawalRequestsTable from "../../components/BackOffice/Transaction/WithdrawalRequestsTable.vue";
+import OvertimeRequestsTable from "../../components/BackOffice/Transaction/OvertimeRequestsTable.vue";
+import SalariesTransfersTable from "../../components/BackOffice/Transaction/SalariesTransfersTable.vue";
 
 export default {
   components: {

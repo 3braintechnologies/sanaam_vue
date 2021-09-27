@@ -108,7 +108,7 @@ export default {
   justify-content: space-between;
   position: fixed;
   width: 100%;
-  z-index: 1299;
+  z-index: 1050;
   top: 0;
 }
 #the-header-container .left-container {

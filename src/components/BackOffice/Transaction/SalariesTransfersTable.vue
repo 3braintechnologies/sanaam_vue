@@ -125,6 +125,9 @@
                           type="button"
                           stylevariant="secondary3"
                           style="height:28px;font-size:10px;font-family:MARKPROBOLD;flex:0.5;"
+                          data-bs-toggle="modal"
+                          data-bs-target="#salariesTransfersModal"
+                          @click="getEmployeeInfo(row?.id)"
                         >
                           Transfer
                         </base-button>
@@ -187,14 +190,17 @@
         </li>
       </ul>
     </nav>
+    <salaries-transfers-modal></salaries-transfers-modal>
   </div>
 </template>
 
 <script>
 import moment from "moment";
+import SalariesTransfersModal from "./SalariesTransfersModal.vue";
 
 export default {
   props: ["page_size", "getCompanyListMethod"],
+  components: { SalariesTransfersModal },
   data() {
     return {
       data: null,
@@ -223,6 +229,9 @@ export default {
       if (this.activePage < this.totalPage) {
         this.activePage = this.activePage + 1;
       }
+    },
+    getEmployeeInfo(id) {
+      this.$store.dispatch("employees/employeeInfo", id);
     }
   },
   watch: {

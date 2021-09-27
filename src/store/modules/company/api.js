@@ -12,4 +12,9 @@ export default {
     let result = coreApi.GET(url);
     return result;
   },
+  getCompanyInfo: (company_id) => {
+    let url = `/backoffice/companies/${company_id}`;
+    let result = coreApi.GET(url);
+    return result;
+  },
 };

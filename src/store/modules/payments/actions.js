@@ -23,4 +23,44 @@ export default {
       });
     }
   },
+  async getPaymentInfo(context, payload) {
+    context.commit(TYPES.PAYMENT_INFO_LOADING);
+    try {
+      let res = await API.paymentInfo(payload);
+      if (res && res.data) {
+        context.commit(TYPES.PAYMENT_INFO_SUCCESS, res.data);
+      } else if (res && res.message) {
+        context.commit(TYPES.PAYMENT_INFO_ERROR, res.message);
+      } else {
+        context.commit(
+          TYPES.PAYMENT_INFO_ERROR,
+          Constants.ERROR.INTERNAL_SERVER
+        );
+      }
+    } catch (error) {
+      context.commit(TYPES.PAYMENT_INFO_ERROR, {
+        payload: error.message,
+      });
+    }
+  },
+  async settlePayment(context, payload) {
+    context.commit(TYPES.SETTLE_PAYMENT_LOADING);
+    try {
+      let res = await API.settlePayment(payload);
+      if (res && res.data) {
+        context.commit(TYPES.SETTLE_PAYMENT_SUCCESS, res.data);
+      } else if (res && res.message) {
+        context.commit(TYPES.SETTLE_PAYMENT_ERROR, res.message);
+      } else {
+        context.commit(
+          TYPES.SETTLE_PAYMENT_ERROR,
+          Constants.ERROR.INTERNAL_SERVER
+        );
+      }
+    } catch (error) {
+      context.commit(TYPES.SETTLE_PAYMENT_ERROR, {
+        payload: error.message,
+      });
+    }
+  },
 };

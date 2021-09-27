@@ -16,4 +16,19 @@ export default {
     state.companyList = null;
     state.error = payload;
   },
+  [TYPES.COMPANY_INFO_LOADING](state) {
+    state.loading = true;
+    state.companyInfo = null;
+    state.error = null;
+  },
+  [TYPES.COMPANY_INFO_SUCCESS](state, payload) {
+    state.loading = false;
+    state.companyInfo = payload;
+    state.error = null;
+  },
+  [TYPES.COMPANY_INFO_ERROR](state, payload) {
+    state.loading = false;
+    state.companyInfo = null;
+    state.error = payload;
+  },
 };

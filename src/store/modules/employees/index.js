@@ -9,6 +9,8 @@ export default {
       loading: false,
       error: null,
       employeeList: null,
+      employeeInfo: null,
+      settleSuccess: null,
     };
   },
   mutations,

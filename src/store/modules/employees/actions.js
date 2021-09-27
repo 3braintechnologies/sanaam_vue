@@ -23,4 +23,44 @@ export default {
       });
     }
   },
+  async employeeInfo(context, payload) {
+    context.commit(TYPES.EMPLOYEE_INFO_LOADING);
+    try {
+      let res = await API.employeeInfo(payload);
+      if (res && res.data) {
+        context.commit(TYPES.EMPLOYEE_INFO_SUCCESS, res.data);
+      } else if (res && res.message) {
+        context.commit(TYPES.EMPLOYEE_INFO_ERROR, res.message);
+      } else {
+        context.commit(
+          TYPES.EMPLOYEE_INFO_ERROR,
+          Constants.ERROR.INTERNAL_SERVER
+        );
+      }
+    } catch (error) {
+      context.commit(TYPES.EMPLOYEE_INFO_ERROR, {
+        payload: error.message,
+      });
+    }
+  },
+  async settleSalary(context, payload) {
+    context.commit(TYPES.SETTLE_SALARY_LOADING);
+    try {
+      let res = await API.settleSalary(payload);
+      if (res && res.data) {
+        context.commit(TYPES.SETTLE_SALARY_SUCCESS, res.data);
+      } else if (res && res.message) {
+        context.commit(TYPES.SETTLE_SALARY_ERROR, res.message);
+      } else {
+        context.commit(
+          TYPES.SETTLE_SALARY_ERROR,
+          Constants.ERROR.INTERNAL_SERVER
+        );
+      }
+    } catch (error) {
+      context.commit(TYPES.SETTLE_SALARY_ERROR, {
+        payload: error.message,
+      });
+    }
+  },
 };

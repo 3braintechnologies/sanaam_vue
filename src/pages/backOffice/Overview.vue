@@ -10,7 +10,7 @@
               <div className="title">Filter by</div>
               <div style="width:180px;margin-right:15px;">
                 <base-select
-                  placeholder="Select Company"
+                  placeholder="All"
                   :options="getCompanyOptions"
                   field="selectedCompany"
                   :value="selectedCompany"
@@ -229,7 +229,7 @@ export default {
   data() {
     return {
       selectedCompany: "default",
-      selectedCurrency: "USD",
+      selectedCurrency: "default",
       selectedDate: moment().format("YYYY-MM-DD"),
       salaryChart: null,
       salaryChartOptions: {
@@ -280,16 +280,12 @@ export default {
       }
     },
     selectedCurrency: function(val) {
-      if (val && this.selectedCompany !== "default" && this.selectedDate) {
+      if (val && this.selectedDate) {
         this.getOverviewData();
       }
     },
     selectedDate: function(val) {
-      if (
-        val &&
-        this.selectedCurrency !== "default" &&
-        this.selectedCompany !== "default"
-      ) {
+      if (val && this.selectedCurrency !== "default") {
         this.getOverviewData();
       }
     },
@@ -321,9 +317,9 @@ export default {
         this.withdrawalChart.render();
       }
     },
-    getCompanyOptions: function(data) {
+    getCurrencyOptions: function(data) {
       if (data && data.length && data[0].id) {
-        this.selectedCompany = data[data.length - 1].id;
+        this.selectedCurrency = data[0].id;
       }
     }
   },
@@ -333,9 +329,12 @@ export default {
     },
     getOverviewData() {
       let payload = {};
-
-      payload.company_id = this.selectedCompany;
-      payload.currency = this.selectedCurrency;
+      if (this.selectedCompany !== "default") {
+        payload.company_id = this.selectedCompany;
+      }
+      if (this.selectedCurrency !== "default") {
+        payload.currency = this.selectedCurrency;
+      }
       payload.start_time = new Date(
         new Date(this.selectedDate).setUTCHours(24, 0, 0, 0)
       ).toISOString();
@@ -348,9 +347,7 @@ export default {
   },
   computed: {
     getCompanySelectStyle() {
-      return `border-radius:22px;border:1px solid ${
-        this.selectedCompany !== "default" ? "#3E83FB" : "#ECF3FF"
-      };`;
+      return `border-radius:22px;border:1px solid #3E83FB`;
     },
     getCurrencySelectStyle() {
       return `border-radius:22px;border:1px solid ${

@@ -8,7 +8,9 @@ export default {
     return {
       loading: false,
       error: null,
+      settleSuccess: null,
       paymentList: null,
+      paymentInfo: null,
     };
   },
   mutations,
