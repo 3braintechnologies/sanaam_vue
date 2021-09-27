@@ -69,13 +69,12 @@
 
 <script>
 export default {
-  emits: ["set-company-id"],
   data() {
     return { data: [], activePage: 1, totalPage: 0, page_size: 10 };
   },
   methods: {
     setCompanyId(id) {
-      this.$emit("set-company-id", id);
+      this.$router.push(`/backoffice/dashboard/Companies?companyId=${id}`);
     },
     setPage(page) {
       this.activePage = page;

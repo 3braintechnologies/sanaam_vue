@@ -39,7 +39,7 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach(function(to, _, next) {
+router.beforeEach((to, _, next) => {
   if (
     to.meta.requiresAuth &&
     ((to.meta.isSuper && !JSON.parse(localStorage.getItem("user"))?.is_super) ||
@@ -58,6 +58,13 @@ router.beforeEach(function(to, _, next) {
       next("/company/dashboard/Employees");
   } else {
     next();
+  }
+});
+
+router.afterEach(() => {
+  const element = document.getElementById("main-container");
+  if (element) {
+    element.scrollTop = 0;
   }
 });
 

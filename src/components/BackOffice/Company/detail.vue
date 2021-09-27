@@ -153,7 +153,11 @@
         </thead>
 
         <tbody v-for="(record, index) in employeeListData" :key="index">
-          <tr class="table-row">
+          <tr
+            class="table-row"
+            style="cursor:pointer;"
+            @click="setEmployeeId(record?.id)"
+          >
             <td class="column-cell">
               <div class="employee-name">
                 {{ record?.first_name }} {{ record?.last_name }}
@@ -231,10 +235,13 @@ export default {
     };
   },
   methods: {
+    setEmployeeId(id) {
+      this.$router.push(`/backoffice/dashboard/Companies?employeeId=${id}`);
+    },
     setPage(page) {
       this.activePage = page;
     },
-    getPaymentListMethod(page) {
+    getEmployeeListMethod(page) {
       let filters = {
         page,
         page_size: this.page_size,
@@ -245,7 +252,7 @@ export default {
   },
   watch: {
     activePage(val) {
-      this.getPaymentListMethod(val);
+      this.getEmployeeListMethod(val);
     },
     employeeList(res) {
       this.employeeListData = res?.data?.length ? res.data : null;
@@ -277,14 +284,14 @@ export default {
     }
   },
   beforeMount() {
-    this.getPaymentListMethod(1);
+    this.getEmployeeListMethod(1);
   }
 };
 </script>
 
 <style scoped>
 #company-detail-view {
-  margin-top: 30px;
+  margin-top: 10px;
 }
 #company-detail-view .block {
   cursor: pointer;
