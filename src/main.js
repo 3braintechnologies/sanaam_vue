@@ -7,6 +7,7 @@ import BaseButton from "./components/UI/BaseButton.vue";
 import BaseSpinner from "./components/UI/BaseSpinner.vue";
 import BaseSelect from "./components/UI/BaseSelect.vue";
 import BaseTable from "./components/UI/BaseTable.vue";
+import BasePagination from "./components/UI/BasePagination.vue";
 
 const app = createApp(App);
 
@@ -17,5 +18,6 @@ app.component("base-button", BaseButton);
 app.component("base-spinner", BaseSpinner);
 app.component("base-select", BaseSelect);
 app.component("base-table", BaseTable);
+app.component("base-pagination", BasePagination);
 
 app.mount("#app");

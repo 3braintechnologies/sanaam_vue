@@ -57,42 +57,11 @@
             </div>
           </div>
         </div>
-        <nav
-          aria-label="Page navigation example"
-          v-if="totalPage && data && data.length"
-        >
-          <ul class="pagination justify-content-center">
-            <li
-              class="page-item"
-              :class="{ disabled: activePage === 1 }"
-              @click="prevPage"
-            >
-              <span class="page-link"
-                ><span aria-hidden="true">&laquo;</span>
-              </span>
-            </li>
-            <li
-              class="page-item"
-              v-for="page in totalPage"
-              :key="page"
-              :class="{ active: page === activePage }"
-              @click="changePage(page)"
-            >
-              <span class="page-link">
-                {{ page }}
-              </span>
-            </li>
-            <li
-              class="page-item"
-              :class="{ disabled: activePage === totalPage }"
-              @click="nextPage"
-            >
-              <span class="page-link"
-                ><span aria-hidden="true">&raquo;</span>
-              </span>
-            </li>
-          </ul>
-        </nav>
+        <base-pagination
+          :activePage="activePage"
+          :totalPage="totalPage"
+          @set-page="setPage"
+        ></base-pagination>
       </div>
     </div>
   </div>
@@ -108,18 +77,8 @@ export default {
     setCompanyId(id) {
       this.$emit("set-company-id", id);
     },
-    prevPage() {
-      if (this.activePage > 1) {
-        this.activePage = this.activePage - 1;
-      }
-    },
-    changePage(page) {
+    setPage(page) {
       this.activePage = page;
-    },
-    nextPage() {
-      if (this.activePage < this.totalPage) {
-        this.activePage = this.activePage + 1;
-      }
     },
     getCompanyListMethod(page) {
       let filters = { page, page_size: this.page_size };

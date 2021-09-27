@@ -212,42 +212,11 @@
         </tbody>
       </table>
     </div>
-    <nav
-      aria-label="Page navigation example"
-      v-if="totalPage && employeeListData && employeeListData.length"
-    >
-      <ul class="pagination justify-content-center">
-        <li
-          class="page-item"
-          :class="{ disabled: activePage === 1 }"
-          @click="prevPage"
-        >
-          <span class="page-link"
-            ><span aria-hidden="true">&laquo;</span>
-          </span>
-        </li>
-        <li
-          class="page-item"
-          v-for="page in totalPage"
-          :key="page"
-          :class="{ active: page === activePage }"
-          @click="changePage(page)"
-        >
-          <span class="page-link">
-            {{ page }}
-          </span>
-        </li>
-        <li
-          class="page-item"
-          :class="{ disabled: activePage === totalPage }"
-          @click="nextPage"
-        >
-          <span class="page-link"
-            ><span aria-hidden="true">&raquo;</span>
-          </span>
-        </li>
-      </ul>
-    </nav>
+    <base-pagination
+      :activePage="activePage"
+      :totalPage="totalPage"
+      @set-page="setPage"
+    ></base-pagination>
   </div>
 </template>
 
@@ -262,18 +231,8 @@ export default {
     };
   },
   methods: {
-    prevPage() {
-      if (this.activePage > 1) {
-        this.activePage = this.activePage - 1;
-      }
-    },
-    changePage(page) {
+    setPage(page) {
       this.activePage = page;
-    },
-    nextPage() {
-      if (this.activePage < this.totalPage) {
-        this.activePage = this.activePage + 1;
-      }
     },
     getPaymentListMethod(page) {
       let filters = {
